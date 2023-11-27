@@ -18,11 +18,8 @@ public class Estoque extends GeradorId {
 
 	private ProdutoVariacao produtoVariacao;
 
-	private Integer quantidade;
+	private Integer quantidade=0;
 
-	public Estoque() {
-
-		this.quantidade = 0;
-	}
+	
 
 }

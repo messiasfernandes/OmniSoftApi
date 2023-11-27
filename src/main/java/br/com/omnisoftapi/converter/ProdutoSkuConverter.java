@@ -8,18 +8,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
-import br.com.omnisoftapi.domain.entity.ProdutoMedida;
-import br.com.omnisoftapi.model.dto.ProdutoMedidaDTO;
+
+import br.com.omnisoftapi.domain.entity.ProdutoSku;
+import br.com.omnisoftapi.model.dto.ProdutoSkuDTO;
+
 
 @Component
-public class ProdutoMedidaConverter {
+public class ProdutoSkuConverter {
 	
 	@Autowired
 	private ModelMapper modelMapper;
 
-	public ProdutoMedidaDTO toDto(ProdutoMedida objeto) {
+	public ProdutoSkuDTO toDto(ProdutoSku objeto) {
 
-		return modelMapper.map(objeto, ProdutoMedidaDTO.class);
+		return modelMapper.map(objeto, ProdutoSkuDTO.class);
 	}
 
 //	public SubGrupo toEntity(SubGrupoInput objeto) {
@@ -27,11 +29,11 @@ public class ProdutoMedidaConverter {
 //		return modelMapper.map(objeto, SubGrupo.class);
 //	}
 
-	public List<ProdutoMedidaDTO> toCollectionDto(List<ProdutoMedida> subgrupos) {
+	public List<ProdutoSkuDTO> toCollectionDto(List<ProdutoSku> subgrupos) {
 		return subgrupos.stream().map(this::toDto).collect(Collectors.toList());
 	}
 
-	public Page<ProdutoMedidaDTO> topage(Page<ProdutoMedida> objetos) {
+	public Page<ProdutoSkuDTO> topage(Page<ProdutoSku> objetos) {
 
 		return objetos.map(obj -> toDto(obj));
 	}

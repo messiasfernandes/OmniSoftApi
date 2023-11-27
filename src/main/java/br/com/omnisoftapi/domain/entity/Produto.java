@@ -19,6 +19,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
@@ -44,6 +45,7 @@ public class Produto extends GeradorId{
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn
 	private MarcaProduto marcaProduto;
+
 	@Fetch(FetchMode.SUBSELECT)
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ProdutoVariacao> proutos_varicaoes = new ArrayList<>();
