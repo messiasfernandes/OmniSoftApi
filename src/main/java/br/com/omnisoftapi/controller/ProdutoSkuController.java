@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.omnisoftapi.converter.ProdutoSkuConverter;
 import br.com.omnisoftapi.domain.dao.DaoProdutoSku;
 import br.com.omnisoftapi.model.dto.ProdutoSkuDTO;
+import br.com.omnisoftapi.utils.Normalizacao;
 
 @RequestMapping("produtossku")
 @RestController
@@ -27,7 +28,7 @@ public class ProdutoSkuController {
 			@RequestParam(value = "parametro", required = false, defaultValue = "") String parametro,
 			@RequestParam(value = "page", defaultValue = "0") Integer pagina,
 			@RequestParam(value = "size", defaultValue = "10") Integer size, Pageable page) {
-
+		parametro= Normalizacao.normalizarNome(parametro);
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(produtoSkuConverter.topage(daoProdutoSku.search(parametro, page)));
 	}

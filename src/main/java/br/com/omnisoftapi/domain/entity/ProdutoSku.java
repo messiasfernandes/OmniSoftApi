@@ -1,9 +1,18 @@
 package br.com.omnisoftapi.domain.entity;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import br.com.omnisoftapi.domain.enums.Medida;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -25,9 +34,10 @@ public class ProdutoSku extends GeradorId {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(nullable = false)
 	private ProdutoVariacao produtoVariacao;
-	@Column(length = 20 , nullable = false, unique = true)
-     private String sku;
-
+	@Column(length = 20, nullable = false, unique = true)
+	private String sku;
+	@Column(length = 13)
+	private String codigoEan13aux;
 	@Column
 	private Integer mutiplicador;
 	@Digits(integer = 9, fraction = 2)
@@ -36,27 +46,67 @@ public class ProdutoSku extends GeradorId {
 	@Enumerated(EnumType.STRING)
 	private Medida medida;
 	@Getter(value = AccessLevel.NONE)
+	private Integer qtdeporSku;
 	@Transient
-	private Integer estoqueproduto;
+	private String caracteristica;
+	@Fetch(FetchMode.SUBSELECT)
+	@ElementCollection(fetch = FetchType.LAZY)
+	@CollectionTable(name = "produto_atributos", joinColumns = @JoinColumn(name = "produtosku_id"))
+	@BatchSize(size = 10)
+	private List<Atributo> atributos = new ArrayList<>();
+	@Setter(value = AccessLevel.NONE)
+	@Digits(integer = 9, fraction = 4)
+    private BigDecimal precodeVenda;
 	@Getter(value = AccessLevel.NONE)
 	@Transient
-	private Integer estoquetotal;
-
+    private BigDecimal valordeVenda;
 	@Transient
-	private Integer TotalestoqueProduto() {
-		estoqueproduto = produtoVariacao.getEstoque().getQuantidade() / mutiplicador;
-		return estoqueproduto;
+	private String concatenar() {
+		StringBuilder strBuilder = new StringBuilder();
+		var tam = atributos.size() - 1;
+
+		for (int i = 0; i < atributos.size(); i++) {
+
+			if (i == tam) {
+
+				strBuilder.append(atributos.get(i).getTipo().concat(" : "));
+				strBuilder.append(atributos.get(i).getValor().concat(" "));
+
+			} else {
+
+				strBuilder.append(atributos.get(i).getTipo().concat(" : "));
+				strBuilder.append(atributos.get(i).getValor().concat(" | "));
+			}
+
+		}
+
+		return strBuilder.toString();
+
 	}
 
-	public Integer getEstoqueproduto() {
-		estoqueproduto = produtoVariacao.getEstoque().getQuantidade() / mutiplicador;
-		return estoqueproduto;
+	public String getCaracteristica() {
+		return concatenar();
 	}
 
-	public Integer getEstoquetotal() {
-		estoquetotal = produtoVariacao.getEstoque().getQuantidade();
-		System.out.println(estoquetotal);
-		return estoquetotal;
-	}
+	public Integer getQtdeporSku() {
+		if (qtdeporSku == null) {
+			qtdeporSku = produtoVariacao.getEstoque().getQuantidade() / mutiplicador;
+		}
 
+		return qtdeporSku;
+	}
+	public void setPrecodeVanda(BigDecimal precodeVanda) {
+		this.precodeVenda = precodeVanda.setScale(3, RoundingMode.HALF_UP);
+	}
+	
+	public BigDecimal getValordeVenda() {
+		if(precodeVenda==null) {
+			valordeVenda = produtoVariacao.getPrecovenda().multiply(new BigDecimal(mutiplicador)) ;
+		}
+		else {
+			valordeVenda = precodeVenda;
+		}
+		System.out.println(valordeVenda);
+		return valordeVenda;
+	}
 }

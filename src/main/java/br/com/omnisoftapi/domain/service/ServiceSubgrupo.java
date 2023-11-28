@@ -48,7 +48,9 @@ public class ServiceSubgrupo extends ServiceFuncoes implements ServiceModel<SubG
 	@Transactional
 	@Override
 	public SubGrupo salvar(SubGrupo objeto) {
-		SubGrupo subGrupoExistente = daoSubGrupo.buscar(objeto.getNomeSubgrupo());
+		var nome =  Normalizacao.normalizarNome( objeto.getNomeSubgrupo());
+		
+		SubGrupo subGrupoExistente = daoSubGrupo.buscar(nome);
 		if (subGrupoExistente != null && !subGrupoExistente.equals(objeto)) {
 			throw new NegocioException("SubGrupo já cadastrada no banco de dados");
 		}

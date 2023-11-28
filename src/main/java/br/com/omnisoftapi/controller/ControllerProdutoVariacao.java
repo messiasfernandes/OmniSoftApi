@@ -26,7 +26,7 @@ public class ControllerProdutoVariacao {
 			@RequestParam(value = "parametro", required = false, defaultValue = "") String parametro,
 			@RequestParam(value = "page", defaultValue = "0") Integer pagina,
 			@RequestParam(value = "size", defaultValue = "10") Integer size, Pageable page) {
-
+	;
 		return ResponseEntity.status(HttpStatus.OK)
 				.body(produtoVariacaoConverter.topage(serviceProdutoVariacao.buscar(parametro, page)));
 	}
