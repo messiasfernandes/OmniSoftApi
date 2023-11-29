@@ -10,26 +10,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.omnisoftapi.converter.ProdutoSkuConverter;
-import br.com.omnisoftapi.domain.dao.DaoProdutoSku;
-import br.com.omnisoftapi.model.dto.ProdutoSkuDTO;
+import br.com.omnisoftapi.converter.ProdutoConverter;
+import br.com.omnisoftapi.domain.service.ServiceProduto;
+import br.com.omnisoftapi.model.dto.ProdutoComSkuDTO;
 import br.com.omnisoftapi.utils.TolowerCase;
 
-@RequestMapping("produtossku")
+@RequestMapping("produtosvariacoes")
 @RestController
-public class ProdutoSkuController {
+public class ControllerProduto {
 	@Autowired
-   private ProdutoSkuConverter produtoSkuConverter;
+	private ProdutoConverter produtoConverter;
 	@Autowired
-   private DaoProdutoSku daoProdutoSku;
-	
+	private ServiceProduto serviceProduto;
+
 	@GetMapping
-	public ResponseEntity<Page<ProdutoSkuDTO>> listar(
+	public ResponseEntity<Page<ProdutoComSkuDTO>> listar(
 			@RequestParam(value = "parametro", required = false, defaultValue = "") String parametro,
 			@RequestParam(value = "page", defaultValue = "0") Integer pagina,
 			@RequestParam(value = "size", defaultValue = "10") Integer size, Pageable page) {
-		parametro= TolowerCase.normalizarString(parametro);
+		parametro = TolowerCase.normalizarString(parametro);
 		return ResponseEntity.status(HttpStatus.OK)
-				.body(produtoSkuConverter.topage(daoProdutoSku.search(parametro, page)));
+				.body((produtoConverter.topage(serviceProduto.buscar(parametro, page))));
 	}
 }

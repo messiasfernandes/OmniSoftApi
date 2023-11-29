@@ -5,7 +5,7 @@ package br.com.omnisoftapi.domain.entity;
 
 
 
-import br.com.omnisoftapi.utils.Normalizacao;
+import br.com.omnisoftapi.utils.TolowerCase;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -29,7 +29,7 @@ public class SubGrupo  extends GeradorId{
 	@Column(length = 45 , nullable = false)
 	private String nomeSubgrupo;                                                                                                                                                                
 	public void setNomeSubgrupo(String nomeSubgrupo) {
-		this.nomeSubgrupo = Normalizacao.normalizarNome(nomeSubgrupo);
+		this.nomeSubgrupo = TolowerCase.normalizarString(nomeSubgrupo);
 	}
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn

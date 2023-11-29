@@ -1,10 +1,8 @@
 package br.com.omnisoftapi.utils;
 
-public class Normalizacao {
-	public Normalizacao() {
-		
-	}
-	public static  String normalizarNome( final String nome) {
+public class TolowerCase {
+	
+	public static  String normalizarString( final String nome) {
         if (nome == null || nome.trim().isEmpty()) {
             return nome;  // ou lançar uma exceção, dependendo dos requisitos
         }

@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import br.com.omnisoftapi.domain.dao.DaoSubGrupo;
 import br.com.omnisoftapi.domain.entity.SubGrupo;
 import br.com.omnisoftapi.domain.service.exeption.NegocioException;
-import br.com.omnisoftapi.utils.Normalizacao;
 import br.com.omnisoftapi.utils.ServiceFuncoes;
+import br.com.omnisoftapi.utils.TolowerCase;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -20,13 +20,13 @@ public class ServiceSubgrupo extends ServiceFuncoes implements ServiceModel<SubG
 	@Override
 	public Page<SubGrupo> buscar(String nome, Pageable pageable) {
 		Page<SubGrupo> page=null;
-		nome= Normalizacao.normalizarNome(nome);
+		nome= TolowerCase.normalizarString(nome);
 	if(ehnumero(nome)) {
 		System.out.println("passou aqui");
 		Long id = Sonumero(nome);
 		page= daoSubGrupo.pesquisarpoId(id, pageable);
 	}else {
-		 nome =Normalizacao.normalizarNome(nome);
+		 nome =TolowerCase.normalizarString(nome);
 
 			page= daoSubGrupo.search(nome, pageable);
 	}
@@ -48,7 +48,7 @@ public class ServiceSubgrupo extends ServiceFuncoes implements ServiceModel<SubG
 	@Transactional
 	@Override
 	public SubGrupo salvar(SubGrupo objeto) {
-		var nome =  Normalizacao.normalizarNome( objeto.getNomeSubgrupo());
+		var nome =  TolowerCase.normalizarString( objeto.getNomeSubgrupo());
 		
 		SubGrupo subGrupoExistente = daoSubGrupo.buscar(nome);
 		if (subGrupoExistente != null && !subGrupoExistente.equals(objeto)) {

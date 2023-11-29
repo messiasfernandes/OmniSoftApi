@@ -2,7 +2,7 @@ package br.com.omnisoftapi.domain.entity;
 
 
 
-import br.com.omnisoftapi.utils.Normalizacao;
+import br.com.omnisoftapi.utils.TolowerCase;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import lombok.AccessLevel;
@@ -27,11 +27,11 @@ public class Atributo {
 	private String valor;
 
 	public void setTipo(String tipo) {
-		this.tipo = Normalizacao.normalizarNome(tipo);
+		this.tipo = TolowerCase.normalizarString(tipo);
 	}
 
 	public void setValor(String valor) {
-		this.valor = Normalizacao.normalizarNome(valor);
+		this.valor = TolowerCase.normalizarString(valor);
 	}
 
 }

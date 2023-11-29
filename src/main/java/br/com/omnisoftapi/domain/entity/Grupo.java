@@ -2,7 +2,7 @@ package br.com.omnisoftapi.domain.entity;
 
 
 
-import br.com.omnisoftapi.utils.Normalizacao;
+import br.com.omnisoftapi.utils.TolowerCase;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotBlank;
@@ -21,7 +21,7 @@ public class Grupo extends GeradorId{
 	@Column(length = 45 , nullable = false)
 	private String nomeGrupo;
 	public void setNomeGrupo(String nomeGrupo) {
-		this.nomeGrupo = Normalizacao.normalizarNome(nomeGrupo);
+		this.nomeGrupo =TolowerCase.normalizarString(nomeGrupo);
 	}
 	
   
