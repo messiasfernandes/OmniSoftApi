@@ -16,7 +16,7 @@ public class Estoque extends GeradorId {
 	// @JsonBackReference
 	@OneToOne(fetch = FetchType.LAZY)
 
-	private ProdutoVariacao produtoVariacao;
+	private Produto produto;
 
 	private Integer quantidade=0;
 

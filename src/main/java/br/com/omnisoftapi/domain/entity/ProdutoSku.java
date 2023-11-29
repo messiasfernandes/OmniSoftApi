@@ -33,11 +33,13 @@ public class ProdutoSku extends GeradorId {
 	private static final long serialVersionUID = 1L;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(nullable = false)
-	private ProdutoVariacao produtoVariacao;
+	private Produto produto;
 	@Column(length = 20, nullable = false, unique = true)
 	private String sku;
 	@Column(length = 13)
-	private String codigoEan13aux;
+	private String codigoEan13Sku;
+	@Column(length = 255)
+	private String imagemPrincipal;
 	@Column
 	private Integer mutiplicador;
 	@Digits(integer = 9, fraction = 2)
@@ -46,7 +48,7 @@ public class ProdutoSku extends GeradorId {
 	@Enumerated(EnumType.STRING)
 	private Medida medida;
 	@Getter(value = AccessLevel.NONE)
-	private Integer qtdeporSku;
+	private Integer qtdePorSku;
 	@Transient
 	private String caracteristica;
 	@Fetch(FetchMode.SUBSELECT)
@@ -89,11 +91,11 @@ public class ProdutoSku extends GeradorId {
 	}
 
 	public Integer getQtdeporSku() {
-		if (qtdeporSku == null) {
-			qtdeporSku = produtoVariacao.getEstoque().getQuantidade() / mutiplicador;
+		if (qtdePorSku == null) {
+			qtdePorSku = produto.getEstoque().getQuantidade() / mutiplicador;
 		}
 
-		return qtdeporSku;
+		return qtdePorSku;
 	}
 	public void setPrecodeVanda(BigDecimal precodeVanda) {
 		this.precodeVenda = precodeVanda.setScale(3, RoundingMode.HALF_UP);
@@ -101,7 +103,7 @@ public class ProdutoSku extends GeradorId {
 	
 	public BigDecimal getValordeVenda() {
 		if(precodeVenda==null) {
-			valordeVenda = produtoVariacao.getPrecovenda().multiply(new BigDecimal(mutiplicador)) ;
+			valordeVenda = produto.getPrecovenda().multiply(new BigDecimal(mutiplicador)) ;
 		}
 		else {
 			valordeVenda = precodeVenda;

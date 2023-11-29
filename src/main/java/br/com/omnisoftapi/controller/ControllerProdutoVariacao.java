@@ -12,22 +12,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.omnisoftapi.converter.ProdutoVariacaoConverter;
 import br.com.omnisoftapi.domain.service.ServiceProdutoVariacao;
-import br.com.omnisoftapi.model.dto.ProdutoVariacaoDTO;
+
 
 @RequestMapping("produtosvariacoes")
 @RestController
 public class ControllerProdutoVariacao {
-	@Autowired
-	private ProdutoVariacaoConverter produtoVariacaoConverter;
-	@Autowired
-    private ServiceProdutoVariacao serviceProdutoVariacao;
-	@GetMapping
-	public ResponseEntity<Page<ProdutoVariacaoDTO>> listar(
-			@RequestParam(value = "parametro", required = false, defaultValue = "") String parametro,
-			@RequestParam(value = "page", defaultValue = "0") Integer pagina,
-			@RequestParam(value = "size", defaultValue = "10") Integer size, Pageable page) {
-	;
-		return ResponseEntity.status(HttpStatus.OK)
-				.body(produtoVariacaoConverter.topage(serviceProdutoVariacao.buscar(parametro, page)));
-	}
+//	@Autowired
+//	private ProdutoVariacaoConverter produtoVariacaoConverter;
+//	@Autowired
+//    private ServiceProdutoVariacao serviceProdutoVariacao;
+//	@GetMapping
+//	public ResponseEntity<Page<ProdutoVariacaoDTO>> listar(
+//			@RequestParam(value = "parametro", required = false, defaultValue = "") String parametro,
+//			@RequestParam(value = "page", defaultValue = "0") Integer pagina,
+//			@RequestParam(value = "size", defaultValue = "10") Integer size, Pageable page) {
+//	;
+//		return null;
+//			//	ResponseEntity.status(HttpStatus.OK)
+//			//	.body(produtoVariacaoConverter.topage(serviceProdutoVariacao.buscar(parametro, page)));
+//	}
 }
