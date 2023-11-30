@@ -22,16 +22,16 @@ public class ServiceProduto extends ServiceFuncoes implements ServiceModel<Produ
 			nome = TolowerCase.normalizarString(nome);
      	page = daoProduto.search(nome, pageable);
 		}
-		if ((ehnumero(nome)) && (qtdecaraceteres(nome) != 13)) {
-			Long id = Sonumero(nome);
-			System.out.println("pasoo"+ id);
-			page = daoProduto.buscarporId(id, pageable);
-		}
-		if ((ehnumero(nome)) && (qtdecaraceteres(nome) == 13)) {
-			page = daoProduto.buscarPorEan(nome, pageable);
-	//	}else {
-//		page = daoProduto.search(nome, pageable);
-	}
+//		if ((ehnumero(nome)) && (qtdecaraceteres(nome) != 13)) {
+//			Long id = Sonumero(nome);
+//			System.out.println("pasoo"+ id);
+//			page = daoProduto.buscarporId(id, pageable);
+//		}
+//		if ((ehnumero(nome)) && (qtdecaraceteres(nome) == 13)) {
+//			page = daoProduto.buscarPorEan(nome, pageable);
+//	//	}else {
+////		page = daoProduto.search(nome, pageable);
+//	}
 		return page;
 		
 	}

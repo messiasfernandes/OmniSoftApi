@@ -15,7 +15,7 @@ import br.com.omnisoftapi.domain.service.ServiceProduto;
 import br.com.omnisoftapi.model.dto.ProdutoComSkuDTO;
 import br.com.omnisoftapi.utils.TolowerCase;
 
-@RequestMapping("produtosvariacoes")
+@RequestMapping("produtos")
 @RestController
 public class ControllerProduto {
 	@Autowired

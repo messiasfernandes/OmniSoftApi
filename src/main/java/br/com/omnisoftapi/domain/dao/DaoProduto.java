@@ -12,12 +12,18 @@ import br.com.omnisoftapi.domain.entity.Produto;
 @Repository
 public interface DaoProduto extends JpaRepository<Produto, Long> {
 
-	@Query("SELECT DISTINCT p FROM Produto p " +
-		       "LEFT JOIN FETCH p.proutos_skus ps " +
-		       "LEFT JOIN FETCH p.marcaProduto " +
-		       "LEFT JOIN FETCH p.subgrupo s " +
-		       "LEFT JOIN FETCH p.estoque e " +
-		       "WHERE p.codigoEan13 = :parametro OR ps.codigoEan13Sku = :parametro")
+	@Query(value= "SELECT DISTINCT p FROM Produto p " +
+		       "LEFT JOIN  p.proutos_skus ps " +
+		       "LEFT JOIN  p.marcaProduto " +
+		       "LEFT JOIN  p.subgrupo s " +
+		       "LEFT JOIN  p.estoque e " +
+		       "WHERE p.codigoEan13 = :parametro OR ps.codigoEan13Sku = :parametro", 
+		       countQuery = "SELECT cout(p) FROM Produto p " +
+				       "LEFT JOIN  p.proutos_skus ps " +
+				       "LEFT JOIN  p.marcaProduto " +
+				       "LEFT JOIN  p.subgrupo s " +
+				       "LEFT JOIN  p.estoque e " 
+		       )
 	Page<Produto> buscarPorEan(@Param("parametro") String parametro, Pageable pageable);
 
 	@Query("SELECT DISTINCT p FROM Produto p " +
