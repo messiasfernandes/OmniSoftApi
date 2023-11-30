@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.omnisoftapi.api.SubGupoControllerOpenApi;
 import br.com.omnisoftapi.converter.SubGrupoConverter;
+import br.com.omnisoftapi.domain.entity.SubGrupo;
 import br.com.omnisoftapi.domain.service.ServiceSubgrupo;
 import br.com.omnisoftapi.model.dto.SubGrupoDTO;
 import br.com.omnisoftapi.model.input.SubGrupoInput;
@@ -43,11 +44,11 @@ public class ControllerSubGrupo implements SubGupoControllerOpenApi {
 				.body(subGrupoConverter.topage(serviceSubgrupo.buscar(parametro, page)));
 	}
 
-	@DeleteMapping
+	@DeleteMapping("/{id}")
 	@Override
-	public ResponseEntity<Void> remover(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResponseEntity<Void> remover(@ PathVariable Long id) {
+		serviceSubgrupo.excluir(id);
+		return ResponseEntity.noContent().build();
 	}
 
 	@Override
@@ -68,7 +69,7 @@ public class ControllerSubGrupo implements SubGupoControllerOpenApi {
 	@PostMapping
 	@Override
 	public ResponseEntity<SubGrupoDTO> criar(@Valid @RequestBody SubGrupoInput subgrupo, HttpServletResponse response) {
-		var subsalvo = serviceSubgrupo.salvar(subGrupoConverter.toEntity(subgrupo));
+		var subsalvo   = serviceSubgrupo.salvar(subGrupoConverter.toEntity(subgrupo));
 		return ResponseEntity.status(HttpStatus.CREATED).body(subGrupoConverter.toDto(subsalvo));
 	}
 

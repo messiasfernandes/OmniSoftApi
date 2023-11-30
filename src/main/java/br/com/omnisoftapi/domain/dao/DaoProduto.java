@@ -40,7 +40,7 @@ public interface DaoProduto extends JpaRepository<Produto, Long> {
 	       "LEFT JOIN FETCH p.marcaProduto " +
 	       "LEFT JOIN FETCH p.subgrupo s " +
 	       "LEFT JOIN FETCH p.estoque e " +
-	       "WHERE p.nomeProduto LIKE %:parametro% OR s.nomeSubgrupo LIKE %:parametro% OR p.marcaProduto.nomeMarca LIKE %:parametro% " +
+	       "WHERE p.nomeProduto LIKE %:parametro% OR p.subgrupo.nomeSubgrupo LIKE %:parametro% OR p.marcaProduto.nomeMarca LIKE %:parametro% " +
 	       "ORDER BY p.nomeProduto")
 	Page<Produto> search(@Param("parametro") String parametro, Pageable pageable);
 	 
