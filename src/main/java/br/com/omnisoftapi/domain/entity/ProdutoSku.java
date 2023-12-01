@@ -9,6 +9,8 @@ import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.omnisoftapi.domain.enums.Medida;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -31,6 +33,7 @@ import lombok.Setter;
 public class ProdutoSku extends GeradorId {
 
 	private static final long serialVersionUID = 1L;
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(nullable = false)
 	private Produto produto;

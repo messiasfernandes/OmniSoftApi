@@ -71,12 +71,12 @@ public class Produto extends GeradorId{
 	private BigDecimal customedio;
 	@Column(length = 13)
 	private String codigoEan13;
-	@JsonIgnore
+///	@JsonIgnore
 
 
 	@JsonIgnoreProperties(value = { "nomeSubgrupo" }, allowGetters = true)
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
-	@JoinColumn
+	@JoinColumn(name = "subgrupo_id")
 	private SubGrupo subgrupo;
 	@Getter(value = AccessLevel.NONE)
 	@Transient
@@ -86,9 +86,10 @@ public class Produto extends GeradorId{
 	private Integer estoquetotal;
 	
 	@OneToOne(mappedBy = "produto", fetch = FetchType.LAZY)
-	@JoinColumn
+	@JoinColumn(name = "produto_id")
 	private Estoque estoque;
 	@Fetch(FetchMode.SUBSELECT)
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ProdutoSku> proutos_skus = new ArrayList<>();
 	

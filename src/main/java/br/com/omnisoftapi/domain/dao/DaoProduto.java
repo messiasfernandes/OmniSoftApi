@@ -16,7 +16,7 @@ public interface DaoProduto extends JpaRepository<Produto, Long> {
 		       "LEFT JOIN  p.proutos_skus ps " +
 		       "LEFT JOIN  p.marcaProduto " +
 		       "LEFT JOIN  p.subgrupo s " +
-		       "LEFT JOIN  p.estoque e " +
+		       "LEFT JOIN  p.estoque e LEFT JOIN  ps.atributos " +
 		       "WHERE p.codigoEan13 = :parametro OR ps.codigoEan13Sku = :parametro", 
 		       countQuery = "SELECT cout(p) FROM Produto p " +
 				       "LEFT JOIN  p.proutos_skus ps " +
@@ -38,8 +38,8 @@ public interface DaoProduto extends JpaRepository<Produto, Long> {
 	@Query("SELECT DISTINCT p FROM Produto p " +
 	       "LEFT JOIN FETCH p.proutos_skus ps " +
 	       "LEFT JOIN FETCH p.marcaProduto " +
-	       "LEFT JOIN FETCH p.subgrupo s " +
-	       "LEFT JOIN FETCH p.estoque e " +
+	       "LEFT JOIN FETCH  p.subgrupo s " +
+	       "LEFT JOIN FETCH p.estoque e  " +
 	       "WHERE p.nomeProduto LIKE %:parametro% OR p.subgrupo.nomeSubgrupo LIKE %:parametro% OR p.marcaProduto.nomeMarca LIKE %:parametro% " +
 	       "ORDER BY p.nomeProduto")
 	Page<Produto> search(@Param("parametro") String parametro, Pageable pageable);
