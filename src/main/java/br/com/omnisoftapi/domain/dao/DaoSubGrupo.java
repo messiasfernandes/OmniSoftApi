@@ -12,7 +12,7 @@ import br.com.omnisoftapi.domain.entity.SubGrupo;
 
 
 public interface DaoSubGrupo extends JpaRepository<SubGrupo, Long>{
-	@Query("SELECT DISTINCT s FROM SubGrupo s  LEFT JOIN FETCH s.grupo " )
+	@Query("SELECT  s FROM SubGrupo s  LEFT JOIN FETCH s.grupo " )
 		       
 		Page<SubGrupo> search(
 		    @Param("parametro") String parametro,

@@ -37,7 +37,7 @@ public interface DaoProduto extends JpaRepository<Produto, Long> {
 	Page<Produto> buscarporId( Long parametro, Pageable pageable);
 	
 	
-	@Query("SELECT DISTINCT p FROM Produto p " +
+	@Query("SELECT  p FROM Produto p " +
 	       "LEFT JOIN FETCH p.proutos_skus ps " +
 	       "LEFT JOIN FETCH p.marcaProduto " +
 	       "LEFT JOIN FETCH  p.subgrupo s " +
