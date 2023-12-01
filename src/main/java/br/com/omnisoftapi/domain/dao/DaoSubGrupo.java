@@ -12,9 +12,8 @@ import br.com.omnisoftapi.domain.entity.SubGrupo;
 
 
 public interface DaoSubGrupo extends JpaRepository<SubGrupo, Long>{
-	@Query("SELECT DISTINCT s FROM SubGrupo s  LEFT JOIN FETCH s.grupo " +
-		       "WHERE (s.nomeSubgrupo) like %:parametro% " +
-		       "OR (s.grupo.nomeGrupo) like %:parametro%  ORDER BY s.nomeSubgrupo")
+	@Query("SELECT DISTINCT s FROM SubGrupo s  LEFT JOIN FETCH s.grupo " )
+		       
 		Page<SubGrupo> search(
 		    @Param("parametro") String parametro,
 		    Pageable pageable);

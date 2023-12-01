@@ -20,4 +20,5 @@ public class ProdutoSkuDTO {
 	private String caracteristica;
 	///private PrecoProdutoDTO precoproduto = new PrecoProdutoDTO();
 	
+	
 }

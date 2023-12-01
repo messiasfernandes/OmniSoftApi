@@ -13,7 +13,6 @@ import java.util.List;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.omnisoftapi.utils.TolowerCase;
@@ -73,7 +72,7 @@ public class Produto extends GeradorId{
 	private String codigoEan13;
 ///	@JsonIgnore
 
-
+	
 	@JsonIgnoreProperties(value = { "nomeSubgrupo" }, allowGetters = true)
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn(name = "subgrupo_id")
@@ -84,7 +83,7 @@ public class Produto extends GeradorId{
 	@Getter(value = AccessLevel.NONE)
 	@Transient
 	private Integer estoquetotal;
-	
+
 	@OneToOne(mappedBy = "produto", fetch = FetchType.LAZY)
 	@JoinColumn(name = "produto_id")
 	private Estoque estoque;

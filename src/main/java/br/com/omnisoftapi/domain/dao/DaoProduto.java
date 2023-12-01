@@ -1,5 +1,7 @@
 package br.com.omnisoftapi.domain.dao;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -53,4 +55,8 @@ public interface DaoProduto extends JpaRepository<Produto, Long> {
 	 		+ "		       ORDER BY p.nome_produto"
 	 		 ,  nativeQuery = true)  
 	 Page<Produto> listar(@Param("parametro") String parametro, Pageable pageable);
+	 @Query("SELECT  p FROM Produto p " +
+		       "LEFT JOIN FETCH p.proutos_skus ps    LEFT JOIN FETCH p.subgrupo LEFT JOIN FETCH p.marcaProduto  LEFT JOIN FETCH p.estoque"
+		       )
+	 List<Produto> buscatodos();
 }

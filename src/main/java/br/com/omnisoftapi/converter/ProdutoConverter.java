@@ -1,5 +1,8 @@
 package br.com.omnisoftapi.converter;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,9 +27,9 @@ public class ProdutoConverter {
 //		return modelMapper.map(objeto, SubGrupo.class);
 //	}
 //
-//	public List<ProdutoVariacaoDTO> toCollectionDto(List<ProdutoVariacao> produtosvariacao) {
-//		return produtosvariacao.stream().map(this::toDto).collect(Collectors.toList());
-//	}
+	public List<ProdutoComSkuDTO> toCollectionDto(List<Produto> produtos) {
+		return produtos.stream().map(this::toDto).collect(Collectors.toList());
+	}
 //
 	public Page<ProdutoComSkuDTO> topage(Page<Produto> objetos) {
 

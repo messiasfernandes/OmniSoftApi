@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.omnisoftapi.api.SubGupoControllerOpenApi;
 import br.com.omnisoftapi.converter.SubGrupoConverter;
-import br.com.omnisoftapi.domain.entity.SubGrupo;
 import br.com.omnisoftapi.domain.service.ServiceSubgrupo;
 import br.com.omnisoftapi.model.dto.SubGrupoDTO;
 import br.com.omnisoftapi.model.input.SubGrupoInput;
