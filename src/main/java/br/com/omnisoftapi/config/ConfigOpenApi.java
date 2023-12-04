@@ -26,7 +26,7 @@ public class ConfigOpenApi {
 			contato.setEmail("messiasfernandes@gamil.com");
 			contato.setName("Messias Fernandes");
 			contato.setUrl("https://www.linkedin.com/in/messias-da-consolacao/");
-			return new OpenAPI().info(new Info().title("OmniSyncAPI").version(appVersion).description(appDesciption)
+			return new OpenAPI().info(new Info().title("OmniSoftAPI").version(appVersion).description(appDesciption)
 					.termsOfService("http://swagger.io/terms/").contact(contato)
 					.license(new License().name("Apache 2.0").url("http://springdoc.org")));
 		}

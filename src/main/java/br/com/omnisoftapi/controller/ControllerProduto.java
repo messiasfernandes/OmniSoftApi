@@ -26,7 +26,7 @@ public class ControllerProduto implements ControlleProdutoOpenApi{
 	@Autowired
 	private ServiceProduto serviceProduto;
    @Override
-	
+   @GetMapping
 	public ResponseEntity<Page<ProdutoComSkuDTO>> listar(
 			@RequestParam(value = "parametro", required = false, defaultValue = "") String parametro,
 			@RequestParam(value = "page", defaultValue = "0") Integer pagina,
@@ -35,7 +35,7 @@ public class ControllerProduto implements ControlleProdutoOpenApi{
 		return ResponseEntity.status(HttpStatus.OK)
 				.body((produtoConverter.topage(serviceProduto.buscar(parametro, page))));
 	}
-   @GetMapping
+   
    public ResponseEntity<List<ProdutoComSkuDTO>>buscar(){
 	   return ResponseEntity.ok(serviceProduto.listar());
    }

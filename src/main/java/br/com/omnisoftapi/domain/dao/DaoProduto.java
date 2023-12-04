@@ -14,37 +14,37 @@ import br.com.omnisoftapi.domain.entity.Produto;
 @Repository
 public interface DaoProduto extends JpaRepository<Produto, Long> {
 
-	@Query(value= "SELECT DISTINCT p FROM Produto p " +
-		       "LEFT JOIN  p.proutos_skus ps " +
-		       "LEFT JOIN  p.marcaProduto " +
-		       "LEFT JOIN  p.subgrupo s " +
-		       "LEFT JOIN  p.estoque e LEFT JOIN  ps.atributos " +
-		       "WHERE p.codigoEan13 = :parametro OR ps.codigoEan13Sku = :parametro", 
-		       countQuery = "SELECT cout(p) FROM Produto p " +
-				       "LEFT JOIN  p.proutos_skus ps " +
-				       "LEFT JOIN  p.marcaProduto " +
-				       "LEFT JOIN  p.subgrupo s " +
-				       "LEFT JOIN  p.estoque e " 
+	@Query("SELECT  p FROM Produto p " +
+		       "LEFT JOIN FETCH p.proutos_skus ps " +
+		       "LEFT JOIN FETCH p.marcaProduto mp " +
+		       "LEFT JOIN FETCH p.subgrupo s " +
+		       "LEFT JOIN FETCH p.estoque e " +
+		       "LEFT JOIN FETCH ps.atributos a " + 
+		       "WHERE p.codigoEan13 = :parametro OR ps.codigoEan13Sku = :parametro"
+		       
 		       )
 	Page<Produto> buscarPorEan(@Param("parametro") String parametro, Pageable pageable);
 
-	@Query("SELECT DISTINCT p FROM Produto p " +
+	@Query("SELECT  p FROM Produto p " +
 		       "LEFT JOIN FETCH p.proutos_skus ps " +
-		       "LEFT JOIN FETCH p.marcaProduto " +
+		       "LEFT JOIN FETCH p.marcaProduto mp " +
 		       "LEFT JOIN FETCH p.subgrupo s " +
 		       "LEFT JOIN FETCH p.estoque e " +
+		       "LEFT JOIN FETCH ps.atributos a " + 
 		       "WHERE p.id =:parametro") 
 	Page<Produto> buscarporId( Long parametro, Pageable pageable);
 	
 	
-	@Query("SELECT  p FROM Produto p " +
-	       "LEFT JOIN FETCH p.proutos_skus ps " +
-	       "LEFT JOIN FETCH p.marcaProduto " +
-	       "LEFT JOIN FETCH  p.subgrupo s " +
-	       "LEFT JOIN FETCH p.estoque e  " +
-	       "WHERE p.nomeProduto LIKE %:parametro% OR p.subgrupo.nomeSubgrupo LIKE %:parametro% OR p.marcaProduto.nomeMarca LIKE %:parametro% " +
-	       "ORDER BY p.nomeProduto")
-	Page<Produto> search(@Param("parametro") String parametro, Pageable pageable);
+	@Query("SELECT DISTINCT  p FROM Produto p " +
+		       "LEFT JOIN FETCH p.proutos_skus ps " +
+		       "LEFT JOIN FETCH p.marcaProduto mp " +
+		       "LEFT JOIN FETCH p.subgrupo s " +
+		       "LEFT JOIN FETCH p.estoque e " +
+		       "LEFT JOIN FETCH ps.atributos a " + // Novo JOIN FETCH
+		       "WHERE p.nomeProduto LIKE %:parametro% OR s.nomeSubgrupo LIKE %:parametro% OR mp.nomeMarca LIKE %:parametro% " +
+		       "ORDER BY p.nomeProduto")
+		Page<Produto> search(@Param("parametro") String parametro, Pageable pageable);
+
 	 
 	 @Query(value = "   select p.id, p.nome_produto,p.customedio , p.codigo_ean13,p.marca_produto_id ,"
 	 		+ " p.precocusto ,p.subgrupo_id  , p.precovenda, ps.qtde_por_sku  from produto p  left join produto_sku ps "

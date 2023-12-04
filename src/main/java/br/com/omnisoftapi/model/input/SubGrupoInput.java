@@ -11,8 +11,5 @@ public class SubGrupoInput {
 	
     private GrupoInput grupo= new GrupoInput();
 
-	@Override
-	public String toString() {
-		return "SubGrupoInput [id=" + id + ", nomeSubgrupo=" + nomeSubgrupo + ", grupo=" + grupo + "]";
-	}
+
 }

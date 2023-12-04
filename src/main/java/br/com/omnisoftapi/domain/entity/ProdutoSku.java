@@ -2,8 +2,8 @@ package br.com.omnisoftapi.domain.entity;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
@@ -59,7 +59,7 @@ public class ProdutoSku extends GeradorId {
 
 	@CollectionTable(name = "produto_atributos", joinColumns = @JoinColumn(name = "produtosku_id"))
 	@BatchSize(size = 10)
-	private List<Atributo> atributos = new ArrayList<>();
+	private Set<Atributo> atributos = new HashSet<>();
 	@Setter(value = AccessLevel.NONE)
 	@Digits(integer = 9, fraction = 4)
     private BigDecimal precodeVenda;
@@ -68,26 +68,18 @@ public class ProdutoSku extends GeradorId {
     private BigDecimal valordeVenda;
 	@Transient
 	private String concatenar() {
-		StringBuilder strBuilder = new StringBuilder();
-		var tam = atributos.size() - 1;
+	    StringBuilder strBuilder = new StringBuilder();
 
-		for (int i = 0; i < atributos.size(); i++) {
+	    for (Atributo atributo : atributos) {
+	        strBuilder.append(atributo.getTipo()).append(" : ").append(atributo.getValor()).append(" | ");
+	    }
 
-			if (i == tam) {
+	    // Remove o último "| " se houver algum atributo
+	    if (!atributos.isEmpty()) {
+	        strBuilder.setLength(strBuilder.length() - 2);
+	    }
 
-				strBuilder.append(atributos.get(i).getTipo().concat(" : "));
-				strBuilder.append(atributos.get(i).getValor().concat(" "));
-
-			} else {
-
-				strBuilder.append(atributos.get(i).getTipo().concat(" : "));
-				strBuilder.append(atributos.get(i).getValor().concat(" | "));
-			}
-
-		}
-
-		return strBuilder.toString();
-
+	    return strBuilder.toString();
 	}
 
 	public String getCaracteristica() {
