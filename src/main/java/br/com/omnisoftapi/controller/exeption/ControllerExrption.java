@@ -19,6 +19,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import br.com.omnisoftapi.domain.service.exeption.NegocioException;
+import br.com.omnisoftapi.domain.service.exeption.RegistroNaoEncontrado;
 
 @RestControllerAdvice
 public class ControllerExrption extends ResponseEntityExceptionHandler {
@@ -49,5 +50,15 @@ public class ControllerExrption extends ResponseEntityExceptionHandler {
 				.build();
 		return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
 	}
-	
+	@ExceptionHandler(RegistroNaoEncontrado.class)
+	public ResponseEntity<Object> EntidadeNaoEncontrada(RegistroNaoEncontrado ex, WebRequest request) {
+		var status = HttpStatus.NOT_FOUND;
+
+		var problema = Problema.builder().
+				status(status.value()).
+				titulo(ex.getMessage())
+				.dataHora(OffsetDateTime.now()).build();
+
+		return handleExceptionInternal(ex, problema, new HttpHeaders(), status, request);
+	}
 }

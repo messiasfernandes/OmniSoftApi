@@ -7,7 +7,7 @@ import br.com.omnisoftapi.domain.enums.TipoProduto;
 import lombok.Data;
 
 @Data
-public class ProdutoDTo {
+public class ProdutoDTO {
 
 	private Long id;
 	private BigDecimal precovenda;

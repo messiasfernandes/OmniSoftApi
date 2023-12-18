@@ -17,7 +17,7 @@ public class ProdutoComSkuDTO {
 	private Integer estoqueproduto;
 	private TipoProduto tipoproduto;
 	private Integer estoquetotal;
-	// private Medida medida;
+
 	private String nomeSubgrupo;
 	// private ProdutoSkuDTO proutos_skus = new ProdutoSkuDTO();
 	private Set<ProdutoSkuDTO> proutos_skus = new HashSet<>();

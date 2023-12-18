@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import br.com.omnisoftapi.converter.ProdutoConverter;
 import br.com.omnisoftapi.domain.dao.DaoProduto;
 import br.com.omnisoftapi.domain.entity.Produto;
+import br.com.omnisoftapi.domain.service.exeption.RegistroNaoEncontrado;
 import br.com.omnisoftapi.model.dto.ProdutoComSkuDTO;
 import br.com.omnisoftapi.utils.ServiceFuncoes;
 import br.com.omnisoftapi.utils.TolowerCase;
@@ -61,8 +62,11 @@ public class ServiceProduto extends ServiceFuncoes implements ServiceModel<Produ
 
 	@Override
 	public Produto buccarporid(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	
+		if (daoProduto.findById(id).isEmpty()) {
+			throw new RegistroNaoEncontrado("Produto não encotrada");
+		}
+		return daoProduto.findById(id).get();
 	}
 
 }

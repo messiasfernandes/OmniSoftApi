@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import br.com.omnisoftapi.domain.entity.Produto;
 import br.com.omnisoftapi.model.dto.ProdutoComSkuDTO;
+import br.com.omnisoftapi.model.dto.ProdutoDetalheDTO;
 
 @Component
 public class ProdutoConverter {
@@ -34,5 +35,10 @@ public class ProdutoConverter {
 	public Page<ProdutoComSkuDTO> topage(Page<Produto> objetos) {
 
 		return objetos.map(obj -> toDto(obj));
+	}
+	
+	public ProdutoDetalheDTO toDtoEdit(Produto objeto) {
+
+		return modelMapper.map(objeto, ProdutoDetalheDTO.class);
 	}
 }
