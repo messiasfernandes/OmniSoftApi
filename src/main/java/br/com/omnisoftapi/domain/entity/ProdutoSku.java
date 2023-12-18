@@ -83,7 +83,12 @@ public class ProdutoSku extends GeradorId {
 	}
 
 	public String getCaracteristica() {
-		return concatenar();
+		if(concatenar().isEmpty()) {
+			return "Sem caractericas";
+		}else {
+			return concatenar();
+		}
+		
 	}
 
 	public Integer getQtdeporSku() {
