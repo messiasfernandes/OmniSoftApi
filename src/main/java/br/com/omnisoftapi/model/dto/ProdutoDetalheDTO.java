@@ -19,7 +19,8 @@ public class ProdutoDetalheDTO {
 
 	private BigDecimal precovenda;
 	
-	
+
+	private String imagemPrincipal;
 	private BigDecimal precocusto;
 
 

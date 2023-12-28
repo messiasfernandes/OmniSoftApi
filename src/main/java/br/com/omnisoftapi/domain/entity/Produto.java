@@ -79,6 +79,8 @@ public class Produto extends GeradorId {
 	@Getter(value = AccessLevel.NONE)
 	@Transient
 	private Integer estoquetotal;
+	@Column(length = 255)
+	private String imagemPrincipal;
 	@JsonIgnore
 	@OneToOne(mappedBy = "produto", fetch = FetchType.LAZY)
 	@JoinColumn(name = "produto_id")
