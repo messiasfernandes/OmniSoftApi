@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.omnisoftapi.domain.dao.DaoSubGrupo;
+import br.com.omnisoftapi.domain.entity.Produto;
 import br.com.omnisoftapi.domain.entity.SubGrupo;
 import br.com.omnisoftapi.domain.service.exeption.NegocioException;
 import br.com.omnisoftapi.utils.ServiceFuncoes;
@@ -19,19 +20,23 @@ public class ServiceSubgrupo extends ServiceFuncoes implements ServiceModel<SubG
 
 	@Override
 	public Page<SubGrupo> buscar(String nome, Pageable pageable) {
-		Page<SubGrupo> page=null;
-		nome= TolowerCase.normalizarString(nome);
-	if(ehnumero(nome)) {
-		System.out.println("passou aqui");
-		Long id = Sonumero(nome);
-		page= daoSubGrupo.pesquisarpoId(id, pageable);
-	}else {
-		 nome =TolowerCase.normalizarString(nome);
+		Page<SubGrupo> page = null;
+	if (!ehnumero(nome) && (qtdecaraceteres(nome) >= 0)) {
+			nome = TolowerCase.normalizarString(nome);
+     	page = daoSubGrupo.search(nome, pageable);
+		}
+		if ((ehnumero(nome)) && (qtdecaraceteres(nome) != 13)) {
+			Long id = Sonumero(nome);
+			System.out.println("pasoo"+ id);
+			page = daoSubGrupo.pesquisarpoId(id, pageable);
+		}
+		
+	
+		return page;
+		
+	}
 
-			page= daoSubGrupo.search(nome, pageable);
-	}
-       return page;
-	}
+
 	
 	@Override
 	public void excluir(Long codigo) {

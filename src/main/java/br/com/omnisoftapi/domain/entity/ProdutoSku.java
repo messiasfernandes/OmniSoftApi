@@ -56,7 +56,6 @@ public class ProdutoSku extends GeradorId {
 	private String caracteristica;
 	@Fetch(FetchMode.SUBSELECT)
 	@ElementCollection(fetch = FetchType.LAZY)
-
 	@CollectionTable(name = "produto_atributos", joinColumns = @JoinColumn(name = "produtosku_id"))
 	@BatchSize(size = 10)
 	private Set<Atributo> atributos = new HashSet<>();
