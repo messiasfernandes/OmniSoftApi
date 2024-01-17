@@ -7,13 +7,16 @@ import org.springframework.http.ResponseEntity;
 
 import br.com.omnisoftapi.domain.entity.Produto;
 import br.com.omnisoftapi.model.dto.ProdutoComSkuDTO;
+import br.com.omnisoftapi.model.dto.ProdutoDTO;
 import br.com.omnisoftapi.model.dto.ProdutoDetalheDTO;
+import br.com.omnisoftapi.model.input.ProdutoInput;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Tag(name = "Produtos")
 public interface ControlleProdutoOpenApi extends ContrrollerOrigin {
@@ -27,4 +30,8 @@ public interface ControlleProdutoOpenApi extends ContrrollerOrigin {
 	ResponseEntity<Page<ProdutoComSkuDTO>> listar(String parametro, Integer pagina, Integer size, Pageable page);
 
 	ResponseEntity<ProdutoDetalheDTO> buscar(@Param(value = "ID de um SubGrupo") Long id);
+	@Operation(summary = "Salvar um Produto ")
+	@ApiResponses(value = { @ApiResponse(responseCode = "201", description = "Produto salvo com sucesso"),
+			@ApiResponse(responseCode = "400", description = "problema com resquisão") })
+	public ResponseEntity<ProdutoDTO> criar(@Param(value = "corpo") ProdutoInput produto, HttpServletResponse response);
 }

@@ -52,6 +52,9 @@ public class Produto extends GeradorId {
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
 	@JoinColumn
 	private MarcaProduto marcaProduto;
+	
+	@Column(length = 20)
+	private String codigofabricante;
 
 	public void setNomeProduto(String nomeProduto) {
 		this.nomeProduto = TolowerCase.normalizarString(nomeProduto);

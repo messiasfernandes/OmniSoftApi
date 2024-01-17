@@ -19,8 +19,11 @@ import br.com.omnisoftapi.converter.ProdutoConverter;
 import br.com.omnisoftapi.domain.service.ServiceProduto;
 import br.com.omnisoftapi.model.dto.CodigoBarraEANDTO;
 import br.com.omnisoftapi.model.dto.ProdutoComSkuDTO;
+import br.com.omnisoftapi.model.dto.ProdutoDTO;
 import br.com.omnisoftapi.model.dto.ProdutoDetalheDTO;
+import br.com.omnisoftapi.model.input.ProdutoInput;
 import br.com.omnisoftapi.utils.TolowerCase;
+import jakarta.servlet.http.HttpServletResponse;
 
 @RequestMapping("/produtos")
 @RestController
@@ -58,5 +61,11 @@ public class ControllerProduto implements ControlleProdutoOpenApi {
 		CodigoBarraEANDTO dto = new CodigoBarraEANDTO();
 		dto.setEan13(serviceProduto.geraCodigoEna());
 		return ResponseEntity.status(HttpStatus.CREATED).body(dto);
+	}
+
+	@Override
+	public ResponseEntity<ProdutoDTO> criar(ProdutoInput produto, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
