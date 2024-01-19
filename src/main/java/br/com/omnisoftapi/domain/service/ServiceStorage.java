@@ -28,6 +28,7 @@ public class ServiceStorage {
 	private String localfoto;
 	@Value("${storage.xml}")
 	private String arquivo_xml;
+
 	public List<ArquivoDto> salvar(List<MultipartFile> files) {
 		List<ArquivoDto> arquivcos = new ArrayList<>();
 
@@ -41,7 +42,7 @@ public class ServiceStorage {
 			caminho();
 			criarpasta();
 			try {
-				//
+
 				// arquivo.setUrl( );
 				/// arquivo.setUrl(arquivo.add(WebMvcLinkBuilder.linkTo(ArquivoControler.class).slash(arquivo.getNomeArquivo()).withSelfRel()).toString());
 
@@ -138,7 +139,5 @@ public class ServiceStorage {
 			throw new RuntimeException("Error: " + e.getMessage());
 		}
 	}
-
-
 
 }

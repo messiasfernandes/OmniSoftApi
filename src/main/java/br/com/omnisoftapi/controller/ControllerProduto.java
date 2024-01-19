@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,6 +25,7 @@ import br.com.omnisoftapi.model.dto.ProdutoDetalheDTO;
 import br.com.omnisoftapi.model.input.ProdutoInput;
 import br.com.omnisoftapi.utils.TolowerCase;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 
 @RequestMapping("/produtos")
 @RestController
@@ -44,10 +46,7 @@ public class ControllerProduto implements ControlleProdutoOpenApi {
 				.body((produtoConverter.topage(serviceProduto.buscar(parametro, page))));
 	}
 
-	public ResponseEntity<List<ProdutoComSkuDTO>> buscar() {
-		return ResponseEntity.ok(serviceProduto.listar());
-	}
-
+	
 	@GetMapping("{id}")
 	@Override
 	public ResponseEntity<ProdutoDetalheDTO> buscar(@PathVariable Long id) {
@@ -59,13 +58,15 @@ public class ControllerProduto implements ControlleProdutoOpenApi {
 	public ResponseEntity<CodigoBarraEANDTO> geararCodioEan13() {
 
 		CodigoBarraEANDTO dto = new CodigoBarraEANDTO();
-		dto.setEan13(serviceProduto.geraCodigoEna());
+		dto.setEan13(serviceProduto.geraCodigoEan());
 		return ResponseEntity.status(HttpStatus.CREATED).body(dto);
 	}
 
+	@PostMapping
 	@Override
-	public ResponseEntity<ProdutoDTO> criar(ProdutoInput produto, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResponseEntity<ProdutoDTO> criar(@Valid @RequestBody ProdutoInput produto, HttpServletResponse response) {
+		System.out.println("pasou");
+		var produtosalvao= serviceProduto.salvar(produtoConverter.toEntity(produto));
+		return ResponseEntity.status(HttpStatus.CREATED).body(produtoConverter.toDto(produtosalvao));
 	}
 }

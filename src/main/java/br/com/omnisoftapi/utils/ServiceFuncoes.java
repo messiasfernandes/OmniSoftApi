@@ -44,8 +44,8 @@ public class ServiceFuncoes {
 		}
 		return nome;
 	}
-	  public String geraCodigoEna() {
-	    	return GeradordeCodigo.CriarEann13();
+	  public String geraCodigoEan() {
+	    	return GeradordeCodigo.CriarEAN13();
 	    	
 	    }
 	

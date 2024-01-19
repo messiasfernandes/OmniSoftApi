@@ -37,7 +37,7 @@ public class ProdutoSku extends GeradorId {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(nullable = false)
 	private Produto produto;
-	@Column(length = 20, nullable = false, unique = true)
+	@Column(length = 50, nullable = false, unique = true)
 	private String sku;
 	@Column(length = 13)
 	private String codigoEan13Sku;

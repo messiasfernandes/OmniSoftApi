@@ -19,9 +19,9 @@ public class ProdutoSkuDTO {
 	private BigDecimal valordeVenda;
 	private Integer mutiplicador;
 	private Medida medida;
-    private Integer qtdeporSku;
+    private Integer qtdePorSku;
 	private String caracteristica;
-	///private PrecoProdutoDTO precoproduto = new PrecoProdutoDTO();
+	private EstoqueDto estoque;
 	private Set<Atributo> atributos = new HashSet<>();
 	
 }

@@ -25,8 +25,7 @@ public class ProdutoDetalheDTO {
 	private String codigoEan13;
 
 	private SubGrupoDTO subgrupo;
-
-//	private Estoque estoque;
+	private EstoqueDto estoque;
 
 	private TipoProduto tipoproduto;
 
