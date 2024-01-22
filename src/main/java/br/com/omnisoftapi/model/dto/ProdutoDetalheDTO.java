@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 public class ProdutoDetalheDTO {
-
+	private Long id;
 	private String nomeProduto;
 
 	private MarcaProdutoDTO marcaProduto;
