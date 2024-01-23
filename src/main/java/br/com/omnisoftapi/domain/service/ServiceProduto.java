@@ -58,6 +58,8 @@ public class ServiceProduto extends ServiceFuncoes implements ServiceModel<Produ
     	   estoque.setProduto(objeto);
     	   daoEstoque.save(estoque);
     	   
+       }else {
+    	   objeto.getEstoque().setProduto(objeto);
        }
 		if (objeto.getProutos_skus().size() > 0) {
 			objeto.getProutos_skus().forEach(p -> p.setProduto(objeto));
