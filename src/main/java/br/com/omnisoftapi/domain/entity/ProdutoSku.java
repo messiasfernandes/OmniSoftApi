@@ -10,6 +10,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.omnisoftapi.domain.enums.Medida;
 import jakarta.persistence.CollectionTable;
@@ -30,6 +31,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProdutoSku extends GeradorId {
 
 	private static final long serialVersionUID = 1L;
@@ -97,7 +99,7 @@ public class ProdutoSku extends GeradorId {
 
 		return qtdePorSku;
 	}
-	public void setPrecodeVanda(BigDecimal precodeVanda) {
+	public void setPrecodeVenda(BigDecimal precodeVanda) {
 		this.precodeVenda = precodeVanda.setScale(3, RoundingMode.HALF_UP);
 	}
 	

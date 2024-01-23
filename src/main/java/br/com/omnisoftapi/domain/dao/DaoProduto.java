@@ -39,7 +39,7 @@ public interface DaoProduto extends JpaRepository<Produto, Long> {
 		       "LEFT JOIN FETCH p.proutos_skus ps " +
 		       "LEFT JOIN FETCH p.marcaProduto mp " +
 		       "LEFT JOIN FETCH p.subgrupo s " +
-		       "LEFT JOIN FETCH p.estoque e " +
+		      // "LEFT JOIN FETCH p.estoque e " +
 		       "LEFT JOIN FETCH ps.atributos a " + // Novo JOIN FETCH
 		       "WHERE p.nomeProduto LIKE %:parametro% OR s.nomeSubgrupo LIKE %:parametro% OR mp.nomeMarca LIKE %:parametro% " +
 		       "ORDER BY p.nomeProduto")

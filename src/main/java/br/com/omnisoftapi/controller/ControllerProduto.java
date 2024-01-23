@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,5 +69,17 @@ public class ControllerProduto implements ControlleProdutoOpenApi {
 		System.out.println("pasou");
 		var produtosalvao= serviceProduto.salvar(produtoConverter.toEntity(produto));
 		return ResponseEntity.status(HttpStatus.CREATED).body(produtoConverter.toDto(produtosalvao));
+	}
+
+
+	@PutMapping("/{id}")
+	@Override
+	public ResponseEntity<ProdutoDTO> Atualizar(@PathVariable Long id, @Valid @RequestBody ProdutoInput produto,
+			HttpServletResponse response) {
+		System.out.println(id);
+		produto.setId(id);
+		System.out.println(produto.getId());
+		var produtoeditado = serviceProduto.salvar(produtoConverter.toEntity(produto));
+		return ResponseEntity.status(HttpStatus.OK).body(produtoConverter.toDto(produtoeditado));
 	}
 }

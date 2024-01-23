@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class EstoqueDto {
-   private Integer quantidade;
+	private Long id;
+	private Integer quantidade;
 }

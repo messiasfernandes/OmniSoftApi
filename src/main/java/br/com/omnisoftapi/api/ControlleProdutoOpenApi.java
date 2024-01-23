@@ -34,4 +34,11 @@ public interface ControlleProdutoOpenApi extends ContrrollerOrigin {
 	@ApiResponses(value = { @ApiResponse(responseCode = "201", description = "Produto salvo com sucesso"),
 			@ApiResponse(responseCode = "400", description = "problema com resquisão") })
 	public ResponseEntity<ProdutoDTO> criar(@Param(value = "corpo") ProdutoInput produto, HttpServletResponse response);
+
+	@Operation(summary = "Atualizar um Produto ")
+	@ApiResponses(value = { @ApiResponse(responseCode = "204", description = "Produto Atualizado com sucesso"),
+			@ApiResponse(responseCode = "400", description = "problema com resquisão") })
+	ResponseEntity<ProdutoDTO> Atualizar( @Param(value = "id")Long id,  @Param(value = "corpo") ProdutoInput produto, HttpServletResponse response);
+
+	
 }

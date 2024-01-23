@@ -51,7 +51,9 @@ public class ServiceProduto extends ServiceFuncoes implements ServiceModel<Produ
 	@Transactional
 	@Override
 	public Produto salvar(Produto objeto) {
-       if(objeto.getEstoque()== null || objeto.getEstoque().getId()==null){
+		  System.out.println("pasou no estoqu"+objeto.getEstoque().getId());
+       if(objeto.getEstoque()== null &&  objeto.getEstoque().getId()==null){
+    	 
     	   var estoque = new Estoque();
     	   estoque.setProduto(objeto);
     	   daoEstoque.save(estoque);
@@ -67,6 +69,7 @@ public class ServiceProduto extends ServiceFuncoes implements ServiceModel<Produ
 		}
 		return daoProduto.save(objeto);
 	}
+
 
 	@Override
 	public Produto buccarporid(Long id) {
