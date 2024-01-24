@@ -11,7 +11,6 @@ import java.util.List;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.omnisoftapi.domain.enums.TipoProduto;
@@ -84,8 +83,8 @@ public class Produto extends GeradorId {
 	private Integer estoquetotal;
 	@Column(length = 255)
 	private String imagemPrincipal;
-	@JsonIgnore
-	@OneToOne(mappedBy = "produto", fetch = FetchType.LAZY)
+	
+	@OneToOne(mappedBy = "produto", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "produto_id")
 	private Estoque estoque;
 	@Setter(value = AccessLevel.NONE)

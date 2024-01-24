@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.omnisoftapi.domain.dao.DaoSubGrupo;
-import br.com.omnisoftapi.domain.entity.Produto;
 import br.com.omnisoftapi.domain.entity.SubGrupo;
 import br.com.omnisoftapi.domain.service.exeption.NegocioException;
 import br.com.omnisoftapi.utils.ServiceFuncoes;
