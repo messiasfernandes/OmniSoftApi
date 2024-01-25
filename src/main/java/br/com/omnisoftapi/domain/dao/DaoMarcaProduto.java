@@ -11,7 +11,7 @@ import br.com.omnisoftapi.domain.entity.MarcaProduto;
 public interface DaoMarcaProduto extends JpaRepository<MarcaProduto, Long> {
 	@Query("SELECT DISTINCT m FROM MarcaProduto m  "
 
-			+ " WHERE m.nomeMarca LIKE %:parametro% ")
+			+ " WHERE m.nomeMarca LIKE %:parametro% ORDER BY m.nomeMarca")
 
 	Page<MarcaProduto> search(@Param("parametro") String parametro, Pageable pageable);
 	

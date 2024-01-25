@@ -5,8 +5,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,22 +42,21 @@ public class ControllerMarcaProduto implements ControllerMarcaProdutoOpenApi {
 				.body(marcaProdutoConverter.topage(serviceMarcaProduto.buscar(parametro, page)));
 	}
 
-	@Override
-	public ResponseEntity<Void> remover(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
+	@DeleteMapping("/{id}")
 	@Override
-	public ResponseEntity<MarcaProdutoDTO> buscar(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResponseEntity<Void> remover(@PathVariable Long id) {
+		serviceMarcaProduto.excluir(id);
+		return ResponseEntity.noContent().build();
 	}
-
+    @PutMapping("/{id}")
 	@Override
-	public ResponseEntity<MarcaProdutoDTO> Atualizar(Long id, MarcaProdutoInput marca, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResponseEntity<MarcaProdutoDTO> Atualizar(@PathVariable Long id, @Valid @RequestBody MarcaProdutoInput marca, HttpServletResponse response) {
+    	
+    	System.out.println(marca.getNomeMarca());
+    	marca.setId(id);
+		var marcaSalva = serviceMarcaProduto.salvar(marcaProdutoConverter.toEntity(marca));
+		return ResponseEntity.status(HttpStatus.OK).body(marcaProdutoConverter.toDto(marcaSalva));
 	}
 
 	@PostMapping
@@ -63,5 +65,12 @@ public class ControllerMarcaProduto implements ControllerMarcaProdutoOpenApi {
 			HttpServletResponse response) {
 		var marcaSalva = serviceMarcaProduto.salvar(marcaProdutoConverter.toEntity(marca));
 		return ResponseEntity.status(HttpStatus.CREATED).body(marcaProdutoConverter.toDto(marcaSalva));
+	}
+
+
+	@Override
+	public ResponseEntity<MarcaProdutoDTO> buscar(Long id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
