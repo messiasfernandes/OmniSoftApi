@@ -110,7 +110,7 @@ public class ProdutoSku extends GeradorId {
 	
 	public BigDecimal getValordeVenda() {
 		if(precodeVenda==null) {
-			valordeVenda = produto.getPrecovenda().multiply(new BigDecimal(mutiplicador)) ;
+		precodeVenda= produto.getPrecovenda().multiply(new BigDecimal(mutiplicador)) ;
 		}
 		else {
 			valordeVenda = precodeVenda;
