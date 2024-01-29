@@ -10,18 +10,20 @@ import lombok.Data;
 
 @Data
 public class ProdutoSkuDTO {
-	
+
 //private ProdutoDTo produto = new ProdutoDTo();
 	private Long id;
-	//private String nomeProduto;
-	//private String codigoEan13;
+	// private String nomeProduto;
+	private BigDecimal precodeVenda;
 	private String codigoEan13Sku;
 	private BigDecimal valordeVenda;
 	private Integer mutiplicador;
 	private Medida medida;
-    private Integer qtdePorSku;
+	private Integer qtdePorSku;
+	private String sku;
 	private String caracteristica;
+
 	private EstoqueDto estoque;
 	private Set<Atributo> atributos = new HashSet<>();
-	
+
 }

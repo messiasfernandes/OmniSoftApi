@@ -61,13 +61,13 @@ public class Produto extends GeradorId {
 
 	@Digits(integer = 9, fraction = 4)
 	@Setter(value = AccessLevel.NONE)
-	private BigDecimal precovenda;
+	private BigDecimal precovenda =BigDecimal.ZERO;
 	@Setter(value = AccessLevel.NONE)
 	@Digits(integer = 9, fraction = 4)
-	private BigDecimal precocusto;
+	private BigDecimal precocusto= BigDecimal.ZERO;
 	@Setter(value = AccessLevel.NONE)
 	@Digits(integer = 9, fraction = 4)
-	private BigDecimal customedio;
+	private BigDecimal customedio= BigDecimal.ZERO;
 	@Column(length = 13)
 	private String codigoEan13;
 
@@ -107,7 +107,12 @@ public class Produto extends GeradorId {
 	}
 
 	public void setPrecovenda(BigDecimal precovenda) {
-		this.precovenda = precovenda.setScale(3, RoundingMode.HALF_UP);
+		if(precovenda==null) {
+			precovenda=BigDecimal.ZERO;
+		}else {
+			this.precovenda = precovenda.setScale(3, RoundingMode.HALF_UP);	
+		}
+		
 
 	}
 

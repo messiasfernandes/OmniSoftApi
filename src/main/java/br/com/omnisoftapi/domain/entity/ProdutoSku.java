@@ -63,7 +63,7 @@ public class ProdutoSku extends GeradorId {
 	private Set<Atributo> atributos = new HashSet<>();
 	@Setter(value = AccessLevel.NONE)
 	@Digits(integer = 9, fraction = 4)
-    private BigDecimal precodeVenda;
+    private BigDecimal precodeVenda= BigDecimal.ZERO;
 	@Getter(value = AccessLevel.NONE)
 	@Transient
     private BigDecimal valordeVenda;
@@ -100,7 +100,12 @@ public class ProdutoSku extends GeradorId {
 		return qtdePorSku;
 	}
 	public void setPrecodeVenda(BigDecimal precodeVanda) {
-		this.precodeVenda = precodeVanda.setScale(3, RoundingMode.HALF_UP);
+		if(precodeVanda==null) {
+		this.precodeVenda= BigDecimal.ZERO;
+		}else {
+			this.precodeVenda = precodeVanda.setScale(3, RoundingMode.HALF_UP);
+		}
+		
 	}
 	
 	public BigDecimal getValordeVenda() {
