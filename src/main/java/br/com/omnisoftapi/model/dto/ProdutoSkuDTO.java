@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import br.com.omnisoftapi.domain.entity.Atributo;
+import br.com.omnisoftapi.domain.entity.ImagenProduto;
 import br.com.omnisoftapi.domain.enums.Medida;
 import lombok.Data;
 
@@ -25,5 +26,7 @@ public class ProdutoSkuDTO {
 
 	private EstoqueDto estoque;
 	private Set<Atributo> atributos = new HashSet<>();
+	private Set<ImagenProduto> imagens = new HashSet<>();
+	
 
 }
