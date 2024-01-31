@@ -33,5 +33,5 @@ public class ProdutoDetalheDTO {
 	private TipoProduto tipoproduto;
 
 	private List<ProdutoSkuDTO> proutos_skus = new ArrayList<>();
-	private Set<ImagenProduto> imagens = new HashSet<>();
+	
 }
