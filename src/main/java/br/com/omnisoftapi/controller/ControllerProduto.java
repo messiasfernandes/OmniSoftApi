@@ -35,7 +35,7 @@ public class ControllerProduto implements ControlleProdutoOpenApi {
 	private ServiceProduto serviceProduto;
 
 	@Override
-	@GetMapping
+	@GetMapping(produces = "application/json")
 	public ResponseEntity<Page<ProdutoComSkuDTO>> listar(
 			@RequestParam(value = "parametro", required = false, defaultValue = "") String parametro,
 			@RequestParam(value = "page", defaultValue = "0") Integer pagina,
